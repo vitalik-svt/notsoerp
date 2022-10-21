@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+  <div class="sidebar">
+    <!--- some br to get content out of navbar -->
+      <br><br><br> 
+      <ul class="nav-links">
+        <li>
+          <a href="#">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="link_name">sku</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="{{ url_for('modules.add_sku') }}">add</a></li>
+            <li><a class="link_name" href="https://wikiperdia.org">modify</a></li>
+            <li><a class="link_name" href="#">delete</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="home-content">
+        <i class='bx bx-menu' ></i>
+        <span class="text">Sidebar Menu</span>
+      </div>
+  </section>
+{% endblock sidebar%}
+{% block content %}
+{% endblock content%}
