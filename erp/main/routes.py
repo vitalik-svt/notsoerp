@@ -9,7 +9,7 @@ main = Blueprint('main', __name__)
 @main.route('/home')
 @login_required
 def home():
-    return render_template('about.html', title = 'about')
+    return render_template('modules/modules.html', title = 'about')
 
 @main.route('/about')
 def about():
