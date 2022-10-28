@@ -3,6 +3,9 @@
 .vscode/
 *code-workspace*
 
+# mac
+.DS_store
+
 # Environments
 .env
 .venv
