@@ -6,17 +6,16 @@ main = Blueprint('main', __name__)
 
 
 @main.route('/')
-@main.route('/erp')
-@main.route('/erp/home')
+@main.route('/home')
 @login_required
 def home():
     return render_template('about.html', title = 'about')
 
-@main.route('/erp/about')
+@main.route('/about')
 def about():
     return render_template('about.html', title = 'about')
 
-@main.route('/erp/modules')
+@main.route('/modules')
 def modules():
     return render_template('modules/modules.html', title = 'modules')
 
