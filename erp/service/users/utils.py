@@ -4,6 +4,7 @@ from PIL import Image
 from flask import url_for, current_app
 from erp import mail
 from flask_mail import Message
+from erp.config import Config
 
 
 def save_picture(form_image, need_to_resize=True):
@@ -23,7 +24,7 @@ def save_picture(form_image, need_to_resize=True):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password reset request', sender = 'notsobikeparts@gmail.com', recipients=[user.email])
+    msg = Message('Password reset request', sender = Config.MAIL_USERNAME, recipients=[user.email])
     msg.body = f"""To reset your password visit following link:
 {url_for('service.users.reset_token', token=token, _external=True)}
 

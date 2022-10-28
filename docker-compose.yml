@@ -5,7 +5,7 @@ services:
         image: postgres
         container_name: pgdb
         ports:
-            - "5432:5432"
+            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
         volumes:
             # - /usr/local/var/postgres/data:/var/lib/postgresql/data  #macos
             # - /var/lib/postgres/data:/var/lib/postgresql/data  #linux
@@ -18,7 +18,7 @@ services:
     web:
         build: .
         container_name: web
-        # restart: on-failure
+        # restart: always
         volumes:
             - .:/usr/src/app
         command: python run.py
