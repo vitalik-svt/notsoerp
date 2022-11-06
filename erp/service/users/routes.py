@@ -26,7 +26,7 @@ users = Blueprint('users', __name__)
 #     return render_template('service/register.html', titile='register', form=form)
 
 
-@users.route('/erp/login', methods=['GET', 'POST'])
+@users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.home')) 
@@ -39,10 +39,10 @@ def login():
             return redirect(requested_page) if requested_page else redirect(url_for('main.home'))
         else:
             flash(f'Login unsuccessful! Please check your username and/or password', category='danger')
-    return render_template('service/login.html', titile='login', form=form)
+    return render_template('login/login.html', titile='login', form=form)
 
 
-@users.route('/erp/logout')
+@users.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
