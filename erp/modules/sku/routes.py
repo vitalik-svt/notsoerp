@@ -10,29 +10,32 @@ from flask import Blueprint
 
 modules = Blueprint('modules', __name__)
 
-@modules.route('/erp/modules/sku/add', methods=['GET', 'POST'])
+@modules.route('/modules/sku/add', methods=['GET', 'POST'])
 @login_required
 def add_sku():
     form = SkuForm()
-    if form.validate_on_submit():
-        sku = Sku_inf(sku_id = form.sku_id.data,
-                      product = form.product.data,
-                    #   name = form.name.data,
-                    #   affilation = form.affilation.data,
-                    #   comment = form.comment.data,
-                      name = 'name',
-                      affilation = 'affil',
-                      comment = 'null',
-                      dtm = datetime.utcnow()
-                      )
-        db.session.add(sku)
-        db.session.commit()
-        flash('sku has been added!', category = 'success')
-        return redirect(url_for('main.home'))
-    else:
-      flash("sku hasn't been added!", category = 'danger')
+    if request.method == 'GET':
       return render_template('modules/add_sku.html', form=form)
-
+    if request.method == 'POST':
+      # if form.validate_on_submit():
+      if 1==1:
+          sku = Sku_inf(sku_id = form.sku_id.data,
+                        product = form.product.data,
+                      #   name = form.name.data,
+                      #   affilation = form.affilation.data,
+                      #   comment = form.comment.data,
+                        name = 'name',
+                        affilation = 'affil',
+                        comment = 'null',
+                        dtm = datetime.utcnow()
+                        )
+          db.session.add(sku)
+          db.session.commit()
+          flash('sku has been added!', category = 'success')
+          return redirect(url_for('main.home'))
+      else:
+        flash("sku hasn't been added!", category = 'danger')
+        return render_template('modules/add_sku.html', form=form)
 
 # @posts.route('/post/<int:post_id>')
 # def post(post_id):
