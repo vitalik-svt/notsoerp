@@ -1,5 +1,39 @@
 {% extends "modules/layout_modules.html" %}
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        var maxField = 50; //Input fields increment limitation must be equal Flask form
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.field_wrapper'); //Input field wrapper
+        var x = 1; //Initial field counter is 1
+        
+        //Once add button is clicked
+        $(addButton).click(function(){
+            //Check maximum number of input fields
+            if(x < maxField){ 
+                x++; //Increment field counter
+                $(wrapper).append('<div class="row"> \
+                                        <div class="form-group add-sku-components"> \
+                                            <input type="integer" class="form-control" name="component_id_' + x +'" id="component_id_'+ x +'"/> \
+                                            <input type="float" class="form-control" name="quantity_' + x +'" id="quantity_'+ x +'"/> \
+                                        </div> \
+                                        <div class="remove_button"> \
+                                            <button href="javascript:void(0);">remove component</button> \
+                                        </div> \
+                                   </div> \
+                                    '); //Add field html
+            }
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+</script>
 <form method="POST" action="" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <div class="add-sku-left-form">
@@ -61,11 +95,6 @@
                 {{ form.comment.label(class="form-control-label") }}
                 {% if form.comment.errors %}
                     {{ form.comment(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.comment.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.comment(class="form-control form-control-lg") }}
                 {% endif %}
@@ -85,19 +114,13 @@
         </fieldset>
     </div>
     <div class="add-sku-right-form">
-        <div class="form-group">
-            {{ form.sku_id.label(class="form-control-label") }}
-            {% if form.sku_id.errors %}
-                {{ form.sku_id(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.sku_id.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.sku_id(class="form-control form-control-lg") }}
-            {% endif %}
+        {{ form.sku_components.label() }}
+        <div class="add_button">
+            <button  href="javascript:void(0);">Add component</button>
         </div>
+            <div class="field_wrapper">
+                <!-- just a wrapper for adding fields -->
+            </div>
     </div>
 </form>
 {% endblock content%}

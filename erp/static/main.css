@@ -8,13 +8,13 @@
 /* header */
 
 .header {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 60px;
   background-color: #0771af;
 }
 
 .navbar {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 100%;
 }
 
@@ -34,7 +34,7 @@
 /* main */
 
 .main {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .sidebar{
@@ -58,13 +58,21 @@
 /* here we go */
 
 .add-sku-left-form {
+  position: relative;
   display:inline-block;
-  /* width: 50%; */
-  border: 1px solid black;
 }
 
 .add-sku-right-form {
+  position: relative;
   display:inline-block;
-  /* width: 50%; */
-  border: 1px solid black;
+}
+
+.add-component-id {
+  position: relative;
+  display:inline-block;
+}
+
+.add-component-quantity {
+  position: relative;
+  display:inline-block;
 }
