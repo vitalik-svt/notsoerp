@@ -2,6 +2,7 @@
 import os
 from erp.modules.sku.forms import AddSkuForm, SkuComponentForm
 from erp import db
+from erp.config import logger
 from erp.models.store import Sku_inf, Sku_comp
 from datetime import datetime
 from erp.modules.sku.utils import save_image
@@ -44,6 +45,7 @@ def add_sku():
           db.session.add(sku)
           db.session.add_all(sku_comp)
           db.session.commit()
+          logger.info('sku {} has been added to db'.format(form.sku_id.data))
           
           flash('sku has been added!', category = 'success')
           return redirect(url_for('main.home'))

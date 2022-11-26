@@ -12,6 +12,8 @@ def save_image(form_image, image_name='hex_auto_generated', need_to_resize=True)
         image_fn = random_hex + f_ext
     else:
         image_fn = str(image_name) + f_ext
+    if not os.path.exists(os.path.join(current_app.root_path, 'static/sku_images')):
+        os.mkdir(os.path.join(current_app.root_path, 'static/sku_images'))
     image_path = os.path.join(current_app.root_path, 'static/sku_images', image_fn)
     print('image_path:', image_path)
     
