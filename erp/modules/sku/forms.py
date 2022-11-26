@@ -4,7 +4,7 @@ from wtforms import StringField, TextAreaField, SubmitField, IntegerField, FileF
 from wtforms.validators import DataRequired
 
 
-class _SkuComponentForm(FlaskForm):
+class SkuComponentForm(FlaskForm):
     component_id = IntegerField('component_id', validators=[DataRequired()])
     quantity = FloatField('quantity', validators=[DataRequired()])
 
@@ -17,6 +17,6 @@ class AddSkuForm(FlaskForm):
     comment = TextAreaField('comment')
     image = FileField('catalogue sku image', validators=[FileAllowed(['jpg', 'png', 'bmp'])])
     # sku comp
-    sku_components = FieldList(FormField(_SkuComponentForm), min_entries=1, max_entries=50)
+    sku_components = FieldList(FormField(SkuComponentForm), min_entries=1, max_entries=50)
     # submit button
     submit = SubmitField('Add sku')
