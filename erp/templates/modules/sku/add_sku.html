@@ -1,37 +1,77 @@
 {% extends "modules/layout_modules.html" %}
 {% block content %}
+{% import "modules/sku/dyn_component_addition.html" as macros %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-<script type="text/javascript">
-    $(document).ready(function(){
-        var maxField = 50; //Input fields increment limitation must be equal Flask form
-        var addButton = $('.add_button'); //Add button selector
-        var wrapper = $('.field_wrapper'); //Input field wrapper
-        var x = 1; //Initial field counter is 1
-        
-        //Once add button is clicked
-        $(addButton).click(function(){
-            //Check maximum number of input fields
-            if(x < maxField){ 
-                x++; //Increment field counter
-                $(wrapper).append('<div class="row"> \
-                                        <div class="form-group add-sku-components"> \
-                                            <input type="integer" class="form-control" name="component_id_' + x +'" id="component_id_'+ x +'"/> \
-                                            <input type="float" class="form-control" name="quantity_' + x +'" id="quantity_'+ x +'"/> \
-                                        </div> \
-                                        <div class="remove_button"> \
-                                            <button href="javascript:void(0);">remove component</button> \
-                                        </div> \
-                                   </div> \
-                                    '); //Add field html
+<!-- <script src="./dyn_add_form.js"></script> -->
+<script>
+    $(document).ready(function() {
+      
+    var MaxInputs       = 8; //maximum input boxes allowed
+    var InputsWrapper   = $("#components_wrapper"); //Input boxes wrapper ID
+    var AddButton       = $("#add_component_button"); //Add button ID
+      
+    var x = InputsWrapper.length; //initlal text box count
+    var FieldCount=1; //to keep track of text box added
+      
+    $(AddButton).click(function (e)  //on add input button click
+    {
+            if(x <= MaxInputs) //max input box allowed
+            {
+                FieldCount++; //text box added increment
+                //add input box
+                $(InputsWrapper).append(`
+                                        <div class="row">
+                                        <li>
+                                            <label for="sku_components-` + x + `">Sku Components-` + x + `</label> 
+                                            <table id="sku_components-` + x + `">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>
+                                                            <label for="sku_components-` + x + `-component_id">component_id</label>
+                                                        </th>
+                                                        <td>
+                                                            <input id="sku_components-` + x + `-component_id" name="sku_components-` + x + `-component_id" required="" type="number" value="">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>
+                                                            <label for="sku_components-` + x + `-quantity">quantity</label>
+                                                        </th>
+                                                        <td>
+                                                            <input id="sku_components-` + x + `-quantity" name="sku_components-` + x + `-quantity" required="" type="text" value="">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                        <a href="#" class="btn btn-danger removeclass">×</a>
+                                        </div>
+                                        `);
+
+                x++; //text box increment
             }
-        });
-        
-        //Once remove button is clicked
-        $(wrapper).on('click', '.remove_button', function(e){
-            e.preventDefault();
-            $(this).parent('div').remove(); //Remove field html
-            x--; //Decrement field counter
-        });
+    return false;
+    });
+      
+    $("body").on("click",".removeclass", function(e){ //user click on remove text
+            if( x > 1 ) {
+                    $(this).parent('div').remove(); //remove text box
+                    x--; //decrement textbox
+            }
+    return false;
+    })
+     $('#submit').click(function(){            
+               $.ajax({  
+                    url:"/postskill",  
+                    method:"POST",  
+                    data:$('#add_skills').serialize(),  
+                    success:function(data)  
+                    {  alert(data)
+                         $('#resultbox').html(data);  
+                         $('#add_skills')[0].reset();  
+                    }  
+               });  
+          }); 
     });
 </script>
 <form method="POST" action="" enctype="multipart/form-data">
@@ -108,19 +148,24 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
         </fieldset>
     </div>
     <div class="add-sku-right-form">
         {{ form.sku_components.label() }}
-        <div class="add_button">
-            <button  href="javascript:void(0);">Add component</button>
+        <div>
+            <!-- type=button to specify that we dont need sumbit everytime it's clicked -->
+            <button type="button" id="add_component_button" class="btn btn-success">Add component</button>
         </div>
-            <div class="field_wrapper">
-                <!-- just a wrapper for adding fields -->
-            </div>
+        <div id="components_wrapper">
+                {{ form.sku_components() }}
+            <!-- just a wrapper to add fields -->
+        </div>
+    </div>
+    <!-- <form method="POST" action="" enctype="multipart/form-data">
+
+    </form> -->
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
     </div>
 </form>
 {% endblock content%}

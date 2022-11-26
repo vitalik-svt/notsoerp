@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import logging
 
 # .env file in root, so get the top up folder
 top_up_folder = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../")
@@ -26,3 +27,21 @@ class Config:
     APP_PASSWORD = os.getenv('APP_PASSWORD')
     APP_USER_MAIL = os.getenv('APP_USER_MAIL')
     APP_DEBUG_MODE = True if os.getenv('APP_DEBUG_MODE').lower() == 'true' else False
+
+
+# create custom logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+os.mkdir('log/') if not os.path.exists('log/') else 1
+file_handler = logging.FileHandler('log/main.log')
+file_handler.setLevel(logging.ERROR)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)

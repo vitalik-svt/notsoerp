@@ -1,6 +1,6 @@
 # from erp.modules import modules
 import os
-from erp.modules.sku.forms import AddSkuForm
+from erp.modules.sku.forms import AddSkuForm, SkuComponentForm
 from erp import db
 from erp.models.store import Sku_inf, Sku_comp
 from datetime import datetime
@@ -19,8 +19,11 @@ modules = Blueprint('modules', __name__)
 @login_required
 def add_sku():
     form = AddSkuForm()
+    template_form = SkuComponentForm(prefix='skucomponent-')
+
     if request.method == 'GET':
-      return render_template('modules/sku/add_sku.html', form=form)
+      return render_template('modules/sku/add_sku.html', form=form, _template=template_form)
+
     if request.method == 'POST':
       if form.validate_on_submit():
           sku = Sku_inf(sku_id = form.sku_id.data,
@@ -46,4 +49,4 @@ def add_sku():
           return redirect(url_for('main.home'))
       else:
         flash("sku hasn't been added!", category = 'danger')
-        return render_template('modules/sku/add_sku.html', form=form)
+        return render_template('modules/sku/add_sku.html', form=form, _template=template_form)
