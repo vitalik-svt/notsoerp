@@ -12,7 +12,8 @@ class Config:
     POSTGRES_DB = os.getenv('POSTGRES_DB')
     POSTGRES_USER = os.getenv('POSTGRES_USER')
     POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
-    POSTGRES_PORT = os.getenv('POSTGRES_PORT')
+    POSTGRES_PORT = os.getenv('POSTGRES_INTERNAL_PORT')
+    # note, that here "pgdb" must be equal to container name with postgres!!!
     SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@pgdb:{POSTGRES_PORT}/{POSTGRES_DB}"
 
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
