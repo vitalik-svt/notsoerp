@@ -3,6 +3,7 @@
 {% import "modules/sku/dyn_component_addition.html" as macros %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <script src="/static/js/dyn_add_sku_component.js"></script>
+<script src="/static/js/accordion.js"></script>
 <form class="two_column_form" method="POST" action="" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <div class="add-sku-left-form">
@@ -80,19 +81,22 @@
         </fieldset>
     </div>
     <div class="add-sku-right-form">
-        <div class="row inline-container">
-            <div class="right-form-field" id="components_wrapper">
-                    {{ form.sku_components() }}
-                <!-- just a wrapper to add fields -->
+        <button class="accordion" type="button">sku components</button>
+            <div class="row inline-container panel">
+                <div class="right-form-field" id="components_wrapper">
+                        {{ form.sku_components() }}
+                    <!-- just a wrapper to add fields -->
+                </div>
+                <div class="right-form-button">
+                    <!-- type=button to specify that we dont need sumbit everytime it's clicked -->
+                    <button type="button" id="add_component_button">add</button>
+                </div>
             </div>
-            <div class="right-form-button">
-                <!-- type=button to specify that we dont need sumbit everytime it's clicked -->
-                <button type="button" id="add_component_button">add</button>
-            </div>
-        </div>
     </div>
-    <div class="form-group">
-        {{ form.submit(class="btn btn-outline-info") }}
+    <div class="main-footer-submit-button">
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
     </div>
 </form>
 {% endblock content%}
