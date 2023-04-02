@@ -1,0 +1,101 @@
+
+/* body */
+  
+.body {
+  min-height: 100vh;
+}
+
+/* header */
+
+.header {
+  /* border: 1px solid black; */
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  height: 10%;
+  background-color: #0771af;
+}
+
+.navbar {
+  /* border: 1px solid black; */
+  height: 100%;
+}
+
+.navbar-brand {
+  width: 100px; 
+  float: left;
+}
+
+.navbar-left {
+  float: left;
+}
+
+.navbar-right {
+  float: right
+}
+
+/* main */
+
+.main {
+  border: 1px solid black; 
+/*  height: 90%;*/
+}
+
+.sidebar{
+  position: fixed;
+  width: 240px;
+  /* height: 100%; */
+  background: rgb(131, 136, 120);
+/*  border: 1px solid black;*/
+}
+
+/* content */
+
+.content {
+  position: relative;
+  float: left;
+  left: 240px;
+  width: calc(100% - 240px);
+  display: inline-block;
+/*  border: 1px solid black;*/
+}
+
+.inline-container {
+    display: inline-block;
+    width:100%;
+}
+
+/* here we go */
+
+.main-content-form {
+  position: relative;
+  display: inline-block;
+  width:100%;
+}
+
+.inaccordion-content-form {
+  position: relative;
+  display: inline-block;
+  width:100%;
+}
+
+.form-field {
+  position: relative;
+  float: left;
+  width:70%;
+/*  border: 1px solid black;*/
+}
+
+.form-button {
+  position: relative;
+  float: right;
+  width:20%;
+/*  border: 1px solid black;*/
+}
+
+.main-content-form-submit-button {
+  position: relative;
+  float: left;
+  width:100%;
+/*  border: 1px solid black;*/
+}

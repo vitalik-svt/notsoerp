@@ -1,19 +1,15 @@
 {% extends "layout.html" %}
-{% block main %}
-  <div class="sidebar">
-    <ul class="menu">
-      <li>
-        <a class="link_name" href="#">sku</a>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="{{ url_for('modules.add_sku') }}">add</a></li>
-          <li><a class="link_name" href="https://wikiperdia.org">modify</a></li>
-          <li><a class="link_name" href="#">delete</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <div class="content">
-    {% block content %}
-    {% endblock %}
-  </div>
-{% endblock main%}
+{% block sidebar %}
+  <ul class="menu">
+    <li>
+      <a class="link_name" href="#">sku</a>
+      <ul class="sub-menu">
+        <li><a class="link_name" href="{{ url_for('modules.add_sku') }}">add</a></li>
+        <li><a class="link_name" href="https://wikiperdia.org">modify</a></li>
+        <li><a class="link_name" href="#">delete</a></li>
+      </ul>
+    </li>
+  </ul>
+{% endblock sidebar%}
+{% block content %}
+{% endblock content%}
