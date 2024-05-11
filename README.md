@@ -1,7 +1,7 @@
 # notsoerp
 
-Web based erp application for small and micro business.
-With notsoerp you can easily manage info about orders, clients and goods.
+CLI erp application for small and micro business.
+With notsoerp you can manage info about orders, clients and your goods.
 You can understand cost price of goods, track leftover, calculate PnL and more.
 
 All details are in docs folder.
