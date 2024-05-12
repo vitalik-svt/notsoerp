@@ -2,12 +2,16 @@
 name = "notsoerp"
 version = "0.1.0"
 description = ""
-authors = ["vitalik.svt@gmail.com"]
+authors = ["Vitalik Svt"]
 readme = "README.md"
+
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-sqlalchemy = '*'
+sqlalchemy = "^2.0.0"
+pytest = "^8.2.0"
+sqlalchemy-utils = "^0.41.2"
 
 [build-system]
 requires = ["poetry-core"]
